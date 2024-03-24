@@ -2,20 +2,66 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { signIn, signOut, useSession } from "next-auth/react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { LogInIcon, LogOutIcon } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
+import Image from 'next/image';
+
+
+function AccountDropdown() {
+  const session = useSession();
+  const isLoggedIn = !!session.data;
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant={"link"}>
+          <Avatar className="mr-2">
+            <AvatarImage src={session.data?.user?.image ?? ""} />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          {session.data?.user?.name}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {isLoggedIn ? (
+          <DropdownMenuItem onClick={() => signOut()}>
+            <LogOutIcon className="mr-2" />
+            Sign Out
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem onClick={() => signIn("google")}>
+            <LogInIcon className="mr-2" /> Sign In
+          </DropdownMenuItem>
+        )}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
 
 export function Header() {
   const session = useSession();
 
   return (
-    <header>
-      <div>
-        {session.data ? (
-          <Button onClick={() => signOut()}>Sign Out</Button>
-        ) : (
-          <Button onClick={() => signIn("google")}>Sign In</Button>
-        )}
-        {session.data?.user?.name}
-        <ModeToggle />
+    <header className="bg-gray-100 py-2 dark:bg-gray-900 container mx-auto">
+      <div className="flex justify-between items-center">
+
+        <Link href='/' className="flex gap-2 items-center text-xl hover:underline">
+          <Image src="/Logo.png" width="50" height="50" alt="the app icon" />
+          Collab Sphere
+        </Link>
+
+
+        <div className="flex items-center gap-4">
+          <AccountDropdown />
+          <ModeToggle />
+        </div>
       </div>
     </header>
   );
