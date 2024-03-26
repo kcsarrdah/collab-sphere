@@ -20,7 +20,7 @@ const formSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(1000),
   topic: z.string().min(1).max(100),
-  link: z.string().min(1).max(100),
+  links: z.string().min(1).max(100),
 });
 
 export function CreateRoomForm() {
@@ -32,7 +32,7 @@ export function CreateRoomForm() {
       name: "",
       description: "",
       topic: "",
-      link: "",
+      links: "",
     },
   });
 
@@ -91,7 +91,7 @@ export function CreateRoomForm() {
         />
                 <FormField
           control={form.control}
-          name="link"
+          name="links"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Link</FormLabel>
