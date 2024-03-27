@@ -13,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { TagsList, splitTags } from "@/components/tags-list";
 
 function RoomCard({ room }: { room: Room }) {
   return (
@@ -21,7 +22,8 @@ function RoomCard({ room }: { room: Room }) {
         <CardTitle>{room.name}</CardTitle>
         <CardDescription>{room.description}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-4">
+      <TagsList tags={splitTags(room.topic)} />
         {room.links && (
           <Link
             href={room.links}
