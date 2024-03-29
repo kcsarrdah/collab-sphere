@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Link2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { TagsList, splitTags } from "@/components/tags-list";
+import CollabSphereVideoPlayer from "../../rooms/video-player"
 
 export default async function RoomPage(props: { params: { roomId: string } }) {
   const roomid = props.params.roomId;
@@ -14,7 +15,7 @@ export default async function RoomPage(props: { params: { roomId: string } }) {
     <div className="grid grid-cols-4 min-h-screen ">
       <div className="col-span-3 p-4 pr-2">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-4">
-          Video Player
+          <CollabSphereVideoPlayer room={room} />
         </div>
       </div>
       <div className="col-span-1 p-4 pl-2">
