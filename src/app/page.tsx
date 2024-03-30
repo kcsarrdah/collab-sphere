@@ -13,7 +13,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { TagsList, splitTags } from "@/components/tags-list";
+import { TagsList } from "@/components/tags-list";
+import { splitTags } from "@/lib/utils";
 import { SearchBar } from "./search-bar";
 
 function RoomCard({ room }: { room: Room }) {

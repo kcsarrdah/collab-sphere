@@ -2,7 +2,8 @@ import { getRoom } from "@/data-access/rooms";
 import Link from "next/link";
 import { Link2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { TagsList, splitTags } from "@/components/tags-list";
+import { TagsList } from "@/components/tags-list";
+import { splitTags } from "@/lib/utils";
 import CollabSphereVideoPlayer from "../../rooms/video-player"
 
 export default async function RoomPage(props: { params: { roomId: string } }) {

@@ -1,17 +1,17 @@
-import { Badge } from "@/components/ui/badge";
+"use client";
+import { Badge, badgeVariants } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
-export function splitTags(tags: string) {
-    return tags.split(",").map((topic) => topic.trim());
-}
-
- export function TagsList({ tags }: { tags: string[] }) {
-   return (
+export function TagsList({ tags }: { tags: string[] }) {
+  const router = useRouter();
+  return (
     <div className="flex gap-2 flex-wrap">
-    {tags.map((topic) => (
-      <Badge className="w-fit" key={topic}>
-        {topic}
-      </Badge>
-    ))}
+      {tags.map((topic) => (
+        <button className={cn(badgeVariants())} onClick={() => router.push(`/?search=${topic}`)}>
+          {topic}
+        </button>
+      ))}
     </div>
-   );
- }
+  );
+}
