@@ -14,6 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { TagsList, splitTags } from "@/components/tags-list";
+import { SearchBar } from "./search-bar";
 
 function RoomCard({ room }: { room: Room }) {
   return (
@@ -45,8 +46,13 @@ function RoomCard({ room }: { room: Room }) {
   );
 }
 
-export default async function Home() {
-  const rooms = await getRooms();
+export default async function Home({
+  searchParams
+} : {
+    search: string;
+  },
+) {
+  const rooms = await getRooms(searchParams.search);
 
   return (
     <main className="min-h-screen p-16">
@@ -56,6 +62,8 @@ export default async function Home() {
           <Link href="/create-room">Create Room</Link>
         </Button>
       </div>
+
+      <SearchBar />
 
       <div className="grid grid-cols-3 gap-4">
         {rooms.map((room) => {
