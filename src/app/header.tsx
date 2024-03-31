@@ -57,6 +57,11 @@ export function Header() {
           Collab Sphere
         </Link>
 
+        <nav>
+          <Link className="mr-4 hover:underline"
+          href="/your-rooms">Your Rooms</Link>
+        </nav>
+
         <div className="flex items-center gap-4">
           {session.data && <AccountDropdown />}
           {!session.data && (
