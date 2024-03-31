@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getRooms } from "@/data-access/rooms";
 import { SearchBar } from "./search-bar";
 import { RoomCard } from "@/components/room-card";
+import { unstable_noStore } from "next/cache";
 
 
 export default async function Home({
@@ -12,6 +13,7 @@ export default async function Home({
     search: string;
   },
 ) {
+  unstable_noStore();
   const rooms = await getRooms(searchParams.search);
 
   return (

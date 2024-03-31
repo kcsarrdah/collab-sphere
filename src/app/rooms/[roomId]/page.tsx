@@ -1,13 +1,14 @@
 import { getRoom } from "@/data-access/rooms";
 import Link from "next/link";
 import { Link2 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { TagsList } from "@/components/tags-list";
 import { splitTags } from "@/lib/utils";
 import CollabSphereVideoPlayer from "../../rooms/video-player"
+import { unstable_noStore } from "next/cache";
 
 export default async function RoomPage(props: { params: { roomId: string } }) {
   const roomid = props.params.roomId;
+  unstable_noStore();
   const room = await getRoom(roomid);
 
   if (!room) return <div>Room with this id does not exist</div>;
