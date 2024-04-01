@@ -57,7 +57,7 @@ export function Header() {
           Collab Sphere
         </Link>
 
-        <nav>
+        <nav className="flex gap-8">
           {isLoggedIn && (
             <>
               <Link className="mr-4 hover:underline" href="/browse">
