@@ -25,10 +25,9 @@ const formSchema = z.object({
   links: z.string().min(1).max(100),
 });
 
-export function EditRoomForm({ room }: {room : Room }) {
-    const router = useRouter();
-    const params = useParams();
-    
+export function EditRoomForm({ room }: { room: Room }) {
+  const params = useParams();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,11 +40,11 @@ export function EditRoomForm({ room }: {room : Room }) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     //TODO: invoke a server action to store the data in our dabtabase
-    await editRoomAction({id: params.roomId, ...values});
+    await editRoomAction({ id: params.roomId as string, ...values });
     toast({
       title: "Room edited",
       description: "your Room was successfully edited",
-    })
+    });
   }
 
   return (
@@ -81,7 +80,7 @@ export function EditRoomForm({ room }: {room : Room }) {
             </FormItem>
           )}
         />
-                <FormField
+        <FormField
           control={form.control}
           name="topic"
           render={({ field }) => (
@@ -90,12 +89,14 @@ export function EditRoomForm({ room }: {room : Room }) {
               <FormControl>
                 <Input {...field} />
               </FormControl>
-              <FormDescription>Please mention any topics this room</FormDescription>
+              <FormDescription>
+                Please mention any topics this room
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-                <FormField
+        <FormField
           control={form.control}
           name="links"
           render={({ field }) => (
@@ -104,7 +105,9 @@ export function EditRoomForm({ room }: {room : Room }) {
               <FormControl>
                 <Input {...field} />
               </FormControl>
-              <FormDescription>Please provide any associated links</FormDescription>
+              <FormDescription>
+                Please provide any associated links
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -112,6 +115,5 @@ export function EditRoomForm({ room }: {room : Room }) {
         <Button type="submit">Submit</Button>
       </form>
     </Form>
-
   );
 }
