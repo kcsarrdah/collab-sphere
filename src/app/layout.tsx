@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Header } from "./header";
-import NextTopLoader from 'nextjs-toploader';
+import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,13 +21,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-
         <Providers>
-        <NextTopLoader />
-       <Header />
-            {children}
+          <Toaster />
+          <NextTopLoader />
+          <Header />
+          <div className="container mx-auto">
+          {children}
+          </div>
         </Providers>
-        </body>
+      </body>
     </html>
   );
 }
